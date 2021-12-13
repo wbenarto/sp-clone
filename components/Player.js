@@ -89,19 +89,19 @@ function Player() {
       </div>
 
       <div className="flex items-center justify-evenly">
-        {/* <SwitchHorizontalIcon className="button" /> */}
-        {/* <RewindIcon className="button" /> */}
+        <SwitchHorizontalIcon className="button" />
+        <RewindIcon className="button" />
         {isPlaying ? (
           <PauseIcon onClick={handlePlayPause} className="button w-10 h-10" />
         ) : (
           <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
         )}
 
-        {/* <FastForwardIcon
+        <FastForwardIcon
           onClick={() => spotifyApi.skipToNext()}
           className="button"
-        /> */}
-        {/* <ReplyIcon className="button" /> */}
+        />
+        <ReplyIcon className="button" />
       </div>
 
       <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5 ">

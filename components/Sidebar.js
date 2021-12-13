@@ -26,6 +26,8 @@ function Sidebar() {
         setPlaylists(data.body.items);
       });
     }
+
+    console.log(playlistId);
   }, [session, spotifyApi]);
 
   console.log(playlists);
