@@ -12,11 +12,7 @@ export async function middleware(req) {
   console.log("middleware" + token);
   const { pathname } = req.nextUrl;
 
-  if (token && pathname === "/login") {
-    return NextResponse.next();
-  }
-
-  if (pathname.includes("/api/auth") || token) {
+  if (pathname.includes("/api/auth/callback/spotify") || token) {
     return NextResponse.next();
   }
 
