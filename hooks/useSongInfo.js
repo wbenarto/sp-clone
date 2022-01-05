@@ -26,7 +26,7 @@ function useSongInfo() {
     };
 
     fetchSongInfo();
-  }, [currentIdTrack, spotifyApi]);
+  }, [spotifyApi, currentIdTrack]);
 
   return songInfo;
 }
