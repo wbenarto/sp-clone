@@ -22,12 +22,12 @@ function useSongInfo() {
         );
         const res = await trackInfo.json();
 
-        setSongInfo(trackInfo);
+        setSongInfo(res);
       }
     };
 
     fetchSongInfo();
-  }, [spotifyApi, currentIdTrack]);
+  }, [currentIdTrack, spotifyApi]);
 
   return songInfo;
 }
