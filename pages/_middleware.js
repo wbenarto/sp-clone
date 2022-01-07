@@ -5,6 +5,9 @@ export async function middleware(req) {
   const token = await getToken({
     req,
     secret: process.env.JWT_SECRET,
+    secureCookie:
+      process.env.NEXTAUTH_URL?.startsWith("https://") ??
+      !!process.env.VERCEL_URL,
   });
 
   // Grabs url
@@ -15,7 +18,7 @@ export async function middleware(req) {
     return NextResponse.redirect("/");
   }
   // if user wants to sign in
-  if (pathname.includes("/api/auth") || token) {
+  if (pathname.includes("/api/auth/") || token) {
     return NextResponse.next();
   }
 
