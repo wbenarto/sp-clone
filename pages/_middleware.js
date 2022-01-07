@@ -11,7 +11,9 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   // if user is already signed in, but goes to login page, redirect to home page
-
+  if (token && pathname === "/login") {
+    return NextResponse.redirect("/");
+  }
   // if user wants to sign in
   if (pathname.includes("/api/auth") || token) {
     return NextResponse.next();
