@@ -27,3 +27,4 @@ export async function middleware(req) {
     return NextResponse.redirect("/login");
   }
 }
+// How to set up middleware

@@ -3,7 +3,7 @@ import Center from "../components/Center";
 import Player from "../components/Player";
 import { getSession } from "next-auth/react";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className="bg-black h-screen overflow-hidden">
       <main className="flex">
@@ -12,7 +12,7 @@ export default function Home() {
       </main>
 
       <div className="sticky bottom-0">
-        <Player />
+        <Player accessToken={props.session.user.accessToken} />
       </div>
     </div>
   );

@@ -26,6 +26,20 @@ function useSongInfo() {
       }
     };
 
+    const fetchPlayerInfo = async () => {
+      const playerInfo = await fetch(
+        `https://api.spotify.com/v1/me/player/devices`,
+        {
+          headers: {
+            Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+          },
+        }
+      );
+
+      const playerInfoRes = await playerInfo.json();
+      console.log(playerInfoRes);
+    };
+    fetchPlayerInfo();
     fetchSongInfo();
   }, [currentIdTrack, spotifyApi]);
 

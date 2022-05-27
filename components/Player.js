@@ -20,7 +20,11 @@ import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import useSongInfo from "../hooks/useSongInfo";
 import useSpotify from "../hooks/useSpotify";
 
-function Player() {
+import SpotifyPlayer from "react-spotify-web-playback";
+
+function Player(props) {
+  console.log(props);
+
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [currentTrackId, setCurrentTrackId] =
@@ -75,7 +79,8 @@ function Player() {
 
   return (
     <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-white grid grid-cols-3 text-xs md:text-base px-2 md:px-8">
-      <div className="flex items-center space-x-4">
+      {/* <SpotifyPlayer token={props.accessToken} play={play} /> */}
+      {/* <div className="flex items-center space-x-4">
         <img
           className="hidden md:inline h-10 w-10"
           src={songInfo?.album.images?.[0]?.url}
@@ -120,7 +125,7 @@ function Player() {
           onClick={() => volume < 100 && setVolume(volume + 10)}
           className="button"
         />
-      </div>
+      </div> */}
     </div>
   );
 }
