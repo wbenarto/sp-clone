@@ -11,9 +11,7 @@ export default function Home(props) {
         <Profile/>
       </main>
 
-      {/* <div className="sticky bottom-0">
-        <Player accessToken={props.session.user.accessToken} />
-      </div> */}
+ 
     </div>
   );
 }
