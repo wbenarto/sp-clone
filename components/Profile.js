@@ -16,23 +16,21 @@ const colors = [
   ];
   
 
-function Profile() {
-    const { data: session } = useSession();
+function Profile({session}) {
+    // const { data: session } = useSession();
     const spotifyApi = useSpotify();
     const [color, setColor] = useState(null);
     const [userData, setUserData] = useState([])
 
-    const userInfo = useUserInfo()
-    
-
     useEffect(()=>{
         if (spotifyApi.getAccessToken()) {
         
-           setUserData(userInfo)
+           setUserData(session.user)
         }
     }, [])
 
-    console.log(userData)
+    const userProfile = useUserInfo()
+    console.log(userProfile)
 
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
@@ -51,25 +49,67 @@ function Profile() {
         </div>
       </header> */}
       <section
-        // className={`flex items-end space-x-7 bg-gradient-to-b to-black h-80 text-white p-8 w-full`}
+  
         className='flex items-end justify-center space-x-7 text-white w-full h-80'
       >
   
         <div>
-          <img className='h-40 w-40 flex mx-auto rounded-full' src={userData.images[0].url}></img>
+          <img className='h-40 w-40 flex mx-auto rounded-full' src={userData?.image}></img>
           <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold pt-8">
-          {userData.display_name}
+          {userData?.name}
           </h1>
         </div>
       </section>
       <section 
-        className='text-white'
+        className='text-white h-20 flex p-5'
       >
-        <div>
-           <p>Followers: {userData.followers.total} </p> 
-           
+        <div className='flex content-center text-center'>
+           {/* <p>Followers: {userData.followers.total} </p>  */}
+           <p className='flex '>Followers:</p>
+           <p className='flex '>Following:</p>
+           <p className='flex '>Member since:</p>
         </div>
 
+      </section>
+
+      <section 
+        className='text-white h-[600px] flex'
+      >
+        {/* Top 5 Tracks */}
+        <div className='flex-column h-64 w-1/2 '>
+           {/* <p>Followers: {userData.followers.total} </p>  */}
+          <div className='flex flex-row h-10 w-full items-center justify-evenly  '>
+            <h1 className='flex font-bold text-xl '>Top Tracks of All Time</h1>
+
+            <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
+          </div>
+          <div className='flex-column bg-purple p-2'>
+          {userProfile?.top_5_tracks?.items.map((e, i)=>(
+            
+              <p className='flex h-8'>{e.name}</p> 
+         
+            
+          ))}
+          </div>
+        </div>
+        
+        {/* Top 5 artists */}
+        <div className='flex-column h-64 w-1/2 '>
+           {/* <p>Followers: {userData.followers.total} </p>  */}
+          <div className='flex flex-row h-10 w-full items-center justify-evenly'>
+            <h1 className='flex font-bold text-xl '>Top Artists of All Time</h1>
+
+            <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
+          </div>
+          <div className='flex-column bg-purple p-2'>
+          {userProfile?.top_5_artists?.items.map((e, i)=>(
+            
+              <p className='flex h-8'>{e.name}</p> 
+         
+            
+          ))}
+          </div>
+        </div>
       </section>
     </div>
   )

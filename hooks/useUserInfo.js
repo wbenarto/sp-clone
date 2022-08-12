@@ -5,24 +5,67 @@ import { useState, useEffect } from "react";
 function useUserInfo() {
     const spotifyApi = useSpotify()
     const [userData, setUserData] = useState([])
+    const [topFiveTracks, setTopFiveTracks] = useState({})
+
+    // fetch 5 apis
+    // followers
+    // following
+    // top 5 tracks all time
+    // top 5 artists all time
+    // 5 recently played tracks
+
 
     useEffect(()=> {
-        const fetchUserInfo = async () => {
-            const userInfo = await fetch(`https://api.spotify.com/v1/me/`, {
-                headers: {
-                  Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
-                },
-              })
-              
-            const res = await userInfo.json()
 
-            setUserData(res)
-        }
+      const fetchTopTracks = async () =>{
+        const data = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5`, 
+        {
+          headers: {
+            Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+          },
+        })
 
-        fetchUserInfo()
-        
+        const res = await data.json()
+        setUserData({...userData, "top_5_tracks" : res})
+      }
+
+      const fetchTopArtists = async () =>{
+        const data = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5`, 
+        {
+          headers: {
+            Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+          },
+        })
+
+        const res = await data.json()
+        setUserData({...userData, "top_5_artists" : res})
+      }
+
+      const fetchRecentlyPlayed = async () =>{
+        const data = await fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=10`, 
+        {
+          headers: {
+            Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+          },
+        })
+
+        const res = await data.json()
+        setUserData({...userData, "recently_played" : res})
+      }
+      
+
+
+
+
+
+      
+      fetchTopTracks()
+      fetchTopArtists()
+      fetchRecentlyPlayed()
     }, [])
+    
 
+    console.log(userData)
     return userData
 }
 

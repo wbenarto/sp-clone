@@ -1,13 +1,9 @@
 import {
   HomeIcon,
-  SearchIcon,
   MusicNoteIcon,
   MicrophoneIcon,
-  LibraryIcon,
-  PlusCircleIcon,
-  HeartIcon,
-  RssIcon,
-  ViewListIcon
+  UserCircleIcon,
+  LogoutIcon,
 } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -15,7 +11,6 @@ import { useRecoilState } from "recoil";
 import { playlistIdState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Link from 'next/link'
-import {useRouter} from 'next/router'
 
 function Sidebar() {
   const spotifyApi = useSpotify();
@@ -25,8 +20,6 @@ function Sidebar() {
 
   console.log("you picked playlist ", playlistId);
 
-  const query= useRouter()
-  console.log(query.pathname)
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
 
@@ -50,31 +43,36 @@ function Sidebar() {
         </button>
         </Link>
         
-        <Link href='/playlists'>
+        <Link href='/profile'>
         <button className="flex items-center space-x-2  hover:text-white">
-          <ViewListIcon className="h-5 w-5" />
-          <p>Playlists</p>
+          <UserCircleIcon className="h-5 w-5" />
+          <p>Profile</p>
         </button>
         </Link>
         
+        <Link href='/topartists'>
         <button className="flex items-center space-x-2  hover:text-white ">
           <MusicNoteIcon className="h-5 w-5" />
           <p>Top Artists</p>
         </button>
-    
+        </Link>
+        
+        <Link href='/toptracks'>
         <button className="flex items-center space-x-2 hover:text-white">
           <MicrophoneIcon className="h-5 w-5" />
           <p>Top Tracks</p>
         </button>
 
+        </Link>
+       
         <button onClick={signOut} className="flex items-center space-x-2 text-red-800 hover:text-white">
-          <MicrophoneIcon className="h-5 w-5" />
+          <LogoutIcon className="h-5 w-5" />
           <p>LogOut</p>
         </button>
         
         <hr className="border-t-[0.1px] border-gray-900" />
 
-        {query.pathname !== '/playlists' ? <></> : playlists.map((playlist) => (
+        {playlists.map((playlist) => (
           <Link href='/'>
           <p
             key={playlist.id}
