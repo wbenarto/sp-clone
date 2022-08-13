@@ -21,17 +21,20 @@ function Profile({session}) {
     const spotifyApi = useSpotify();
     const [color, setColor] = useState(null);
     const [userData, setUserData] = useState([])
+    // const [userProfile, setUserProfile] = useState({})
 
     useEffect(()=>{
+     
         if (spotifyApi.getAccessToken()) {
         
            setUserData(session.user)
+           
+           
         }
     }, [])
-
     const userProfile = useUserInfo()
-    console.log(userProfile)
 
+  console.log(userProfile)
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       {/* <header className="absolute top-5 right-8">
@@ -84,7 +87,7 @@ function Profile({session}) {
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
           </div>
           <div className='flex-column bg-purple p-2'>
-          {userProfile?.top_5_tracks?.items.map((e, i)=>(
+          {userProfile?.topTracks?.map((e, i)=>(
             
               <p className='flex h-8'>{e.name}</p> 
          
@@ -102,7 +105,7 @@ function Profile({session}) {
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
           </div>
           <div className='flex-column bg-purple p-2'>
-          {userProfile?.top_5_artists?.items.map((e, i)=>(
+          {userProfile?.topArtists.map((e, i)=>(
             
               <p className='flex h-8'>{e.name}</p> 
          
@@ -114,5 +117,6 @@ function Profile({session}) {
     </div>
   )
 }
+
 
 export default Profile
