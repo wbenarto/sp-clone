@@ -29,12 +29,14 @@ function Profile({session}) {
         
            setUserData(session.user)
            
-           
         }
+        
     }, [])
     const userProfile = useUserInfo()
+    console.log(userProfile)
+    
 
-  console.log(userProfile)
+ 
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
       {/* <header className="absolute top-5 right-8">
@@ -64,13 +66,21 @@ function Profile({session}) {
         </div>
       </section>
       <section 
-        className='text-white h-20 flex p-5'
+        className=' text-white h-24 flex p-5'
       >
-        <div className='flex content-center text-center'>
+        <div className='flex justify-center w-full '>
            {/* <p>Followers: {userData.followers.total} </p>  */}
-           <p className='flex '>Followers:</p>
-           <p className='flex '>Following:</p>
-           <p className='flex '>Member since:</p>
+           <div className='flex-column text-center justify-center  w-24 h-18'>
+           <p className='text-[#2ed930]'>{userProfile?.userInfo?.followers.total}</p>
+           <p>Followers</p>
+           </div>
+           <div className='flex-column text-center justify-center w-24 h-18'>
+           <p className='text-[#2ed930]'>{userProfile?.userFollowing?.total}</p>
+           <p>Following</p>
+           </div>
+           
+          
+    
         </div>
 
       </section>
@@ -88,11 +98,13 @@ function Profile({session}) {
           </div>
           <div className='flex-column bg-purple p-2'>
           {userProfile?.topTracks?.map((e, i)=>(
-            
-              <p className='flex h-8'>{e.name}</p> 
-         
-            
-          ))}
+
+            <div className='flex flex-row h-20 my-5'>
+              <img className='flex h-20 w-20' src={e.album.images[0]?.url}></img>
+              <h1 className='flex h-8 pl-5 self-center'>{i+1}. {e.name}</h1> 
+            </div>
+
+))}
           </div>
         </div>
         
@@ -105,10 +117,12 @@ function Profile({session}) {
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
           </div>
           <div className='flex-column bg-purple p-2'>
-          {userProfile?.topArtists.map((e, i)=>(
-            
-              <p className='flex h-8'>{e.name}</p> 
-         
+          {userProfile?.topArtists?.map((e, i)=>(
+
+              <div className='flex flex-row h-20 my-5'>
+                <img className='flex h-20 w-20' src={e.images[0]?.url}></img>
+                <h1 className='flex h-8 pl-5 self-center'>{i+1}. {e.name}</h1> 
+              </div>
             
           ))}
           </div>
