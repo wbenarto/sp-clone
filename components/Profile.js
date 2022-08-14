@@ -1,9 +1,12 @@
 import React from 'react'
+import { useRecoilState } from 'recoil';
 import { signOut, useSession } from "next-auth/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
 import useSpotify from "../hooks/useSpotify";
 import useUserInfo from '../hooks/useUserInfo'
+import { playlistState } from '../atoms/playlistAtom';
+import { topTracksState } from '../atoms/topTracksAtom';
 
 const colors = [
     "from-indigo-500",
@@ -18,6 +21,8 @@ const colors = [
 
 function Profile({session}) {
     // const { data: session } = useSession();
+    const [currentTrackIdState, setCurrentTrackIdState] = useRecoilState(playlistState)
+    const [topTracks, setTopTracks] = useRecoilState(topTracksState)
     const spotifyApi = useSpotify();
     const [color, setColor] = useState(null);
     const [userData, setUserData] = useState([])
@@ -33,9 +38,12 @@ function Profile({session}) {
         
     }, [])
     const userProfile = useUserInfo()
-    console.log(userProfile)
-    
+    console.log(userProfile, currentTrackIdState)
 
+    setTopTracks(userProfile.topTracks)
+
+
+    console.log('top tracks atom', topTracks)
  
   return (
     <div className="flex-grow h-screen overflow-y-scroll scrollbar-hide">
@@ -89,9 +97,9 @@ function Profile({session}) {
         className='text-white h-[600px] flex'
       >
         {/* Top 5 Tracks */}
-        <div className='flex-column h-64 w-1/2 '>
+        <div className='flex-column h-64 w-1/2  px-2'>
            {/* <p>Followers: {userData.followers.total} </p>  */}
-          <div className='flex flex-row h-10 w-full items-center justify-evenly  '>
+          <div className='flex flex-row h-10 w-full items-center justify-between  '>
             <h1 className='flex font-bold text-xl '>Top Tracks of All Time</h1>
 
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
@@ -109,9 +117,9 @@ function Profile({session}) {
         </div>
         
         {/* Top 5 artists */}
-        <div className='flex-column h-64 w-1/2 '>
+        <div className='flex-column h-64 w-1/2 px-2'>
            {/* <p>Followers: {userData.followers.total} </p>  */}
-          <div className='flex flex-row h-10 w-full items-center justify-evenly'>
+          <div className='flex flex-row h-10 w-full items-center justify-between'>
             <h1 className='flex font-bold text-xl '>Top Artists of All Time</h1>
 
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
