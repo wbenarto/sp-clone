@@ -7,6 +7,7 @@ import useSpotify from "../hooks/useSpotify";
 import useUserInfo from '../hooks/useUserInfo'
 import { playlistState } from '../atoms/playlistAtom';
 import { topTracksState } from '../atoms/topTracksAtom';
+import Link from'next/link'
 
 const colors = [
     "from-indigo-500",
@@ -102,17 +103,21 @@ function Profile({session}) {
           <div className='flex flex-row h-10 w-full items-center justify-between  '>
             <h1 className='flex font-bold text-xl '>Top Tracks of All Time</h1>
 
+            <Link href='/topartists'>
             <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
+            </Link>
           </div>
           <div className='flex-column bg-purple p-2'>
           {userProfile?.topTracks?.map((e, i)=>(
-
+            <Link href={`/tracks/${e.id}`}>
             <div className='flex flex-row h-20 my-5'>
               <img className='flex h-20 w-20' src={e.album.images[0]?.url}></img>
               <h1 className='flex h-8 pl-5 self-center'>{i+1}. {e.name}</h1> 
             </div>
+            </Link>
+            
 
-))}
+          ))}
           </div>
         </div>
         
@@ -121,8 +126,9 @@ function Profile({session}) {
            {/* <p>Followers: {userData.followers.total} </p>  */}
           <div className='flex flex-row h-10 w-full items-center justify-between'>
             <h1 className='flex font-bold text-xl '>Top Artists of All Time</h1>
-
-            <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
+            <Link href='/toptracks'>
+              <button className='flex content-center justify-center  border-white border rounded-[50px] p-2 w-[120px]'><p className='text-sm text-center'>SEE MORE</p></button>
+            </Link>
           </div>
           <div className='flex-column bg-purple p-2'>
           {userProfile?.topArtists?.map((e, i)=>(

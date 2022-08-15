@@ -14,7 +14,7 @@ export default function Home({session, data}) {
   
   className='flex items-end justify-center space-x-7 p-10 text-white  h-40'
  >
-   <h1>Top 50 Tracks of All Time</h1>
+   <h1 className='font-bold text-xl'>Top 50 Artists of All Time</h1>
  
  </section>
  <section  className='flex-column items-end justify-center  bg-black text-white w-full '>
