@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react";
 
 export default function Home({session, data}) {
 
-  console.log(session, data)
+  // console.log(session, data)
   const topArtistsData = data.items
   return (
     

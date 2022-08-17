@@ -12,7 +12,7 @@ function TrackDetails({session, res, res2, res3}) {
     "from-purple-500",
   ];
 
-  console.log(res, res2, res3)
+  // console.log(res, res2, res3)
   return (
     <div  className="bg-black h-screen overflow-hidden">
       <main className='flex-column'>
@@ -53,10 +53,7 @@ function TrackDetails({session, res, res2, res3}) {
               <p className=' text-xl'>{res2.danceability}</p>
               <p className=''>Danceability</p>
             </div>
-            <div className='flex-column justify-center text-center items-center py-5 w-24 h-24 border border-white'>
-              <p className='text-xl'>{Math.floor(res.track.tempo)} Bpm</p>
-              <p className=''>Tempo</p>
-            </div>
+  
             <div className='flex-column justify-center text-center items-center py-5 w-24 h-24 border border-white'>
               <p className=' text-xl'>{Math.ceil(res.track.duration/60)}:{Math.floor(res.track.duration%60)}</p>
               <p className=''>Duration</p>

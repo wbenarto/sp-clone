@@ -1,9 +1,10 @@
 
 import { getSession } from "next-auth/react";
+import Link from'next/link'
 
 export default function Home({session, data}) {
 
-  console.log(session, data)
+  // console.log(session, data)
   const topTracksData = data.items
   return (
     
@@ -19,26 +20,25 @@ export default function Home({session, data}) {
  </section>
  <section  className='flex-column items-end justify-center  bg-black text-white w-full '>
    {topTracksData ? topTracksData.map((e,i) => (
-    <div className='flex flex-row justify-center  w-full items-center my-5 h-20'>
-    <p className='w-10 text-center'>{i+1}</p>
-    <img alt='test image' className='h-20 w-20 mx-5 ' src={e.album?.images[0].url}></img>
-    <div className='w-[50%] h-20 '>
-      <h1>{e.name}</h1>
-      <p>{e.artists.map((e,i)=> e.name)}</p>
-      <p>{e.album.name}</p>
+    <Link href={`/tracks/${e.id}`}>
+
+    <div className='flex flex-row cursor-pointer justify-center  w-full items-center my-5 h-20'>
+      <p className='w-10 text-center'>{i+1}</p>
+      <img alt='test image' className='h-20 w-20 mx-5 ' src={e.album?.images[0].url}></img>
+      <div className='w-[50%] h-20 '>
+        <h1>{e.name}</h1>
+        <p>{e.artists.map((e,i)=> e.name)}</p>
+        <p>{e.album.name}</p>
+      </div>
     </div>
-  </div>
+    </Link>
+    
    ))
   : <></>}
    
   </section>
-
         </div>
-      
-        
       </main>
-
- 
     </div>
   );
 }

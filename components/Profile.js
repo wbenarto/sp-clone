@@ -110,7 +110,7 @@ function Profile({session}) {
           <div className='flex-column bg-purple p-2'>
           {userProfile?.topTracks?.map((e, i)=>(
             <Link href={`/tracks/${e.id}`}>
-            <div className='flex flex-row h-20 my-5'>
+            <div className='flex flex-row cursor-pointer h-20 my-5'>
               <img className='flex h-20 w-20' src={e.album.images[0]?.url}></img>
               <h1 className='flex h-8 pl-5 self-center'>{i+1}. {e.name}</h1> 
             </div>
